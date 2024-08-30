@@ -1,3 +1,4 @@
+package prime;
 import java.util.Scanner;
 
 public class Main {
@@ -53,6 +54,8 @@ public class Main {
         account.deposit(amount);
         System.out.println("Deposit successful!");
     }
+
+
 
     private static void withdraw(Scanner sc, BankAccount account) {
         System.out.print("Enter withdrawal amount: ");
