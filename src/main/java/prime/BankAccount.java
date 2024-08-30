@@ -1,22 +1,46 @@
 package prime;
-public class BankAccount {
+class BankAccount {
+    private static int nextAccountNumber = 1000;
+    private int accountNumber;
+    private String accountHolder;
     private double balance;
-    public BankAccount(){
 
+    public BankAccount(String accountHolder, double initialBalance) {
+        this.accountNumber = nextAccountNumber++;
+        this.accountHolder = accountHolder;
+        this.balance = initialBalance;
     }
-    public BankAccount(double balance){
-        this.balance=balance;
+
+    public int getAccountNumber() {
+        return accountNumber;
     }
-    public void deposit(double ammount){
-        this.balance+=ammount;
+
+    public String getAccountHolder() {
+        return accountHolder;
     }
-    public void withdraw(double ammount){
-        this.balance-=ammount;
+
+    public double getBalance() {
+        return balance;
     }
-    public void printBalacne(){
-        System.out.println("Current balance = "+this.balance);
+
+    public void deposit(double amount) {
+        this.balance += amount;
     }
-    public void transferBalance(BankAccount target,double amount){
+
+    public void withdraw(double amount) {
+        if (amount <= this.balance) {
+            this.balance -= amount;
+            System.out.println("Withdrawal successful");
+        } else {
+            System.out.println("Insufficient funds");
+        }
+    }
+
+    public void printBalance() {
+        System.out.println("Current balance for account " + accountNumber + ": " + this.balance);
+    }
+
+    public void transferBalance(BankAccount target, double amount) {
         if (amount <= this.balance) {
             this.withdraw(amount);
             target.deposit(amount);
