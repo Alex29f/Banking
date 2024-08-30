@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="94876737-c7cd-4a27-ab30-5ce048d95853" name="Changes" comment="">
+    <list default="true" id="94876737-c7cd-4a27-ab30-5ce048d95853" name="Changes" comment="Gradle+UnitTest integration">
       <change afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
@@ -147,9 +147,32 @@
       <option name="presentableId" value="Default" />
       <updated>1725001757040</updated>
     </task>
+    <task id="LOCAL-00001" summary="Gradle+UnitTest integration">
+      <created>1725006506359</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1725006506359</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="User">
+          <value>
+            <list>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="*" />
+                </option>
+              </RecentGroup>
+            </list>
+          </value>
+        </entry>
+      </map>
+    </option>
     <option name="TAB_STATES">
       <map>
         <entry key="MAIN">
@@ -164,6 +187,13 @@
                       </list>
                     </value>
                   </entry>
+                  <entry key="user">
+                    <value>
+                      <list>
+                        <option value="*" />
+                      </list>
+                    </value>
+                  </entry>
                 </map>
               </option>
             </State>
@@ -174,5 +204,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="Gradle+UnitTest integration" />
+    <option name="LAST_COMMIT_MESSAGE" value="Gradle+UnitTest integration" />
   </component>
 </project>
