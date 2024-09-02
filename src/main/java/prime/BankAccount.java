@@ -3,11 +3,15 @@ class BankAccount {
     private static int nextAccountNumber = 1000;
     private int accountNumber;
     private String accountHolder;
+    private String email;
+    private String password;
     private double balance;
 
-    public BankAccount(String accountHolder, double initialBalance) {
+    public BankAccount(String accountHolder, String email, String password, double initialBalance) {
         this.accountNumber = nextAccountNumber++;
         this.accountHolder = accountHolder;
+        this.email = email;
+        this.password = password;
         this.balance = initialBalance;
     }
 
@@ -17,6 +21,14 @@ class BankAccount {
 
     public String getAccountHolder() {
         return accountHolder;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public boolean verifyPassword(String inputPassword) {
+        return this.password.equals(inputPassword);
     }
 
     public double getBalance() {

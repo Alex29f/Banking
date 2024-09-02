@@ -1,4 +1,5 @@
 package prime;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -15,7 +16,6 @@ public class Main {
             System.out.println("3. Withdraw");
             System.out.println("4. Check Balance");
             System.out.println("5. Transfer");
-            System.out.println("6. List All Accounts");
             System.out.println("0. Exit");
             System.out.print("Enter your choice: ");
 
@@ -28,7 +28,6 @@ public class Main {
                 case 3 -> withdraw(sc, accounts);
                 case 4 -> checkBalance(sc, accounts);
                 case 5 -> transfer(sc, accounts);
-                case 6 -> listAccounts(accounts);
                 case 0 -> System.out.println("Thank you for using our services!");
                 default -> System.out.println("Invalid choice. Please try again.");
             }
@@ -36,25 +35,35 @@ public class Main {
         sc.close();
     }
 
-    private static void createAccount(Scanner sc, ArrayList<BankAccount> accounts) {
+    public static void createAccount(Scanner sc, ArrayList<BankAccount> accounts) {
         System.out.print("Enter account holder name: ");
         String name = sc.nextLine();
+        System.out.print("Enter email: ");
+        String email = sc.nextLine();
+        System.out.print("Enter password: ");
+        String password = sc.nextLine();
         System.out.print("Enter initial balance: ");
         double initialBalance = sc.nextDouble();
-        BankAccount newAccount = new BankAccount(name, initialBalance);
+        sc.nextLine(); // Consume newline
+
+        BankAccount newAccount = new BankAccount(name, email, password, initialBalance);
         accounts.add(newAccount);
         System.out.println("Account created successfully! Account number: " + newAccount.getAccountNumber());
     }
 
-    private static BankAccount findAccount(Scanner sc, ArrayList<BankAccount> accounts) {
+    public static BankAccount findAccount(Scanner sc, ArrayList<BankAccount> accounts) {
         System.out.print("Enter account number: ");
         int accountNumber = sc.nextInt();
+        sc.nextLine(); // Consume newline
+        System.out.print("Enter password: ");
+        String password = sc.nextLine();
+
         for (BankAccount account : accounts) {
-            if (account.getAccountNumber() == accountNumber) {
+            if (account.getAccountNumber() == accountNumber && account.verifyPassword(password)) {
                 return account;
             }
         }
-        System.out.println("Account not found.");
+        System.out.println("Account not found or incorrect password.");
         return null;
     }
 
@@ -89,26 +98,32 @@ public class Main {
     private static void transfer(Scanner sc, ArrayList<BankAccount> accounts) {
         System.out.println("Source account:");
         BankAccount sourceAccount = findAccount(sc, accounts);
+        if (sourceAccount == null) return;
+
         System.out.println("Destination account:");
-        BankAccount destAccount = findAccount(sc, accounts);
+        System.out.print("Enter destination account number: ");
+        int destAccountNumber = sc.nextInt();
+        sc.nextLine(); // Consume newline
 
-        if (sourceAccount != null && destAccount != null) {
-            System.out.print("Enter transfer amount: ");
-            double amount = sc.nextDouble();
-            sourceAccount.transferBalance(destAccount, amount);
-            System.out.println("Source account balance after transfer:");
-            sourceAccount.printBalance();
-            System.out.println("Destination account balance after transfer:");
-            destAccount.printBalance();
-        }
-    }
-
-    private static void listAccounts(ArrayList<BankAccount> accounts) {
-        System.out.println("\nAll Bank Accounts:");
+        BankAccount destAccount = null;
         for (BankAccount account : accounts) {
-            System.out.println("Account Number: " + account.getAccountNumber() +
-                    ", Holder: " + account.getAccountHolder() +
-                    ", Balance: " + account.getBalance());
+            if (account.getAccountNumber() == destAccountNumber) {
+                destAccount = account;
+                break;
+            }
         }
+
+        if (destAccount == null) {
+            System.out.println("Destination account not found.");
+            return;
+        }
+
+        System.out.print("Enter transfer amount: ");
+        double amount = sc.nextDouble();
+        sc.nextLine(); // Consume newline
+
+        sourceAccount.transferBalance(destAccount, amount);
+        System.out.println("Source account balance after transfer:");
+        sourceAccount.printBalance();
     }
 }
