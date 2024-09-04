@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Banking Operations</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<h1>Banking Operations</h1>
+
+<h2 class="balance">Current Balance: <span th:text="${balance}"></span></h2>
+
+<form th:action="@{/deposit}" method="post">
+    <h3>Deposit</h3>
+    <input type="number" name="amount" step="0.01" required placeholder="Enter amount">
+    <button type="submit">Deposit</button>
+</form>
+
+<form th:action="@{/withdraw}" method="post">
+    <h3>Withdraw</h3>
+    <input type="number" name="amount" step="0.01" required placeholder="Enter amount">
+    <button type="submit">Withdraw</button>
+</form>
+
+<form th:action="@{/transfer}" method="post">
+    <h3>Transfer</h3>
+    <input type="email" name="toEmail" required placeholder="Recipient's email">
+    <input type="number" name="amount" step="0.01" required placeholder="Enter amount">
+    <button type="submit">Transfer</button>
+</form>
+
+<div class="error-message" th:if="${param.error}" th:text="${param.error}"></div>
+
+<nav>
+    <a th:href="@{/hello}">Back to Home</a>
+</nav>
+</body>
+</html>

@@ -1,13 +1,19 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Hello</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
 <h1 th:text="'Hello, ' + ${username} + '!'"></h1>
 <p>Welcome to your personalized page.</p>
-<form th:action="@{/logout}" method="post">
-    <input type="submit" value="Sign Out"/>
-</form>
+<nav>
+    <a th:href="@{/banking}">Go to Banking</a>
+    <form th:action="@{/logout}" method="post" style="display: inline;">
+        <button type="submit">Logout</button>
+    </form>
+</nav>
 </body>
 </html>

@@ -4,8 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import prime.models.User;
 import prime.models.BankAccount;
+import prime.models.User;
 import prime.repositories.UserRepository;
 
 @Service
@@ -27,5 +27,10 @@ public class UserService {
         BankAccount newAccount = bankAccountService.createAccount(savedUser);
         savedUser.setBankAccount(newAccount);
         return savedUser;
+    }
+
+    public User findByEmail(String email) {
+        return userRepository.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("User not found with email: " + email));
     }
 }

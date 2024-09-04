@@ -19,8 +19,10 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests((requests) -> requests
+                        .requestMatchers("/static/**", "/css/**").permitAll()
                         .requestMatchers(AntPathRequestMatcher.antMatcher("/h2-console/**")).permitAll()
                         .requestMatchers("/", "/home", "/register").permitAll()
+                        .requestMatchers("/banking", "/deposit", "/withdraw", "/transfer").authenticated()
                         .anyRequest().authenticated()
                 )
                 .formLogin((form) -> form
@@ -49,7 +51,7 @@ public class SecurityConfig {
     @Bean
     public AuthenticationSuccessHandler authenticationSuccessHandler() {
         SimpleUrlAuthenticationSuccessHandler handler = new SimpleUrlAuthenticationSuccessHandler();
-        handler.setDefaultTargetUrl("/hello");
+        handler.setDefaultTargetUrl("/banking");
         return handler;
     }
 }
